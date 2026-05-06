@@ -4,22 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Portfolio</title>
+    <title>Atrium</title>
 </head>
 <body>
     <header>
         <div class="banner" role="banner">
-            <img src="assets/banner.webp" width="887" height="589" alt="Banner image">
+            <img src="assets/banner.webp" width="1774" height="887" alt="Banner image of Eiffel tower">
             <h1>The Concourse of Kayla May</h1>
         </div>
-        <nav>
-            <li><a id="nav__current-page" href="ïndex.html">Atrium</a></li>
-            <span> | </span>
-            <li><a href="projects.html">Projects</a></li>
-            <span> | </span>
-            <li><a href="socials.html">Socials</a></li>
+        <nav role="navigation">
+            <ul>
+                <li><a id="nav__current-page" href="index.html">Atrium</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="connects.html">Connects</a></li>
+            </ul>
         </nav>
     </header>
+    <section class="hero" role="main">
+        <img src="assets/hero-background.webp" width="1899" height="828" alt="Hero image of concourse">
+        <div class="hero__content">
+            <h2>Welcome to the atrium.</h2>
+            <h3>Conception.</h3>
+            <h3>Contrivance.</h3>
+            <h3 id="hero__content--hightlight">Catharsis.</h3>
+            <p>This is my concourse: an opus of my mind. Explore my projects, ideas, and digital creations thus.</p>
+                <button>
+                    <img src="assets/dice-icon.webp" alt="">
+                    I'm feeling lucky!
+                </button>
+        </div>
+    </section>
+    <section class="about" role="complementary">
+        <h2 class="about__section-header">
+            <span>About Me</span>
+        </h2>
+        <div class="about__info">
+            <div class="about__pfp">
+                <div class="about__pfp--border">
+                    <div class="about__pfp--bevel">
+                        <img src="assets/pfp.webp" width="1344" height="1792" alt="Photo of Kayla May" loading="lazy">
+                    </div>
+                </div>
+                <span class="about__pfp--flourish">
+                    <img src="assets/olive-branch-flourish.webp" alt="Flourish icon">
+                </span>
+                <span id="about__pfp--flourish-text">"Invigorating my mind since 2005"</span>
+            </div>
+            <div class="about__container">
+                <div>
+                    <img src="assets/name-icon.webp" alt="Name icon">
+                    <h3>NAME</h3>
+                    <span>Kayla May</span>
+                </div>
+                <div>
+                    <img src="assets/focus-icon.webp" alt="Focus icon">
+                    <h3>FOCUS</h3>
+                    <span>Front-end development</span>
+                </div>
+                <div>
+                    <img src="assets/current-icon.webp" alt="Current icon">
+                    <h3>CURRENT</h3>
+                    <span>Building interactive web apps</span>
+                </div>
+                <div>
+                    <img src="assets/philosophy-icon.webp" alt="Philosophy icon">
+                    <h3>PHILOSOPHY</h3>
+                    <span>Theravāda buddhism</span>
+                </div>
+                <div>
+                    <img src="assets/relationship-icon.webp" alt="Relationship icon">
+                    <h3>RELATIONSHIP</h3>
+                    <span>Girlfriend</span>
+                </div>
+            </div>
+        </div>
+    </section>
     <script src="script.js"></script>
 </body>
 
