@@ -109,6 +109,30 @@ header {
     object-position: center 0px;
 }
 
+/* ==========================================================================
+   ADVANCED METALLIC RUNIC TEXT MASKING LAYER
+   ========================================================================== */
+
+.banner h1,
+.hero__manifesto {
+    background: linear-gradient(
+        135deg, 
+        var(--color-text-primary) 0%,
+        var(--color-text-muted) 35%,
+        #d5cbef 50%,
+        var(--color-text-primary) 70%,
+        var(--color-text-muted) 100%
+    );
+    
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;      
+    
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.95));
+}
+
 .banner h1 {
     color: var(--color-text-primary);
     font-family: var(--font-family-main);
@@ -146,9 +170,11 @@ nav a {
     transition: color var(--transition-fast);
 }
 
-nav a:hover, nav a:focus-visible {
+nav a:focus-visible {
     color: var(--color-text-accent);
-    outline: none;
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+    border-radius: var(--radius-sm);
 }
 
 nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
@@ -167,25 +193,18 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
 
 /* ==== HERO SECTION ==== */
 
-/* ==== FIXED HERO LAYER ==== */
-
 .hero {
     position: relative;
     width: 100%;
-    min-height: 500px; /* Use min-height instead of fixed height to accommodate expanding text sizes */
     height: 600px;
     overflow: hidden;
-    margin-top: 196px; /* Offsets fixed header context */
+    margin-top: 196px;
     border-bottom: 1px solid var(--color-border);
     box-shadow: 0 4px 12px var(--shadow-primary);
-    
-    /* Center the structural layout content box across all screen widths */
     display: flex;
-    align-items: center; 
-    justify-content: flex-start; /* Matches original alignment design baseline */
+    align-items: center;
 }
 
-/* Replace `.hero img` with this explicit class target */
 .hero__background-image {
     position: absolute;
     inset: 0;
@@ -197,12 +216,20 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
 }
 
 
-/* Atmospheric masking layer guarantees text legibility over unpredictable hero imagery */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(13, 11, 18, 0.9) 0%, rgba(13, 11, 18, 0.4) 50%, rgba(13, 11, 18, 0.8) 100%);
+    background: linear-gradient(90deg, rgba(13, 11, 18, 0.95) 0%, rgba(13, 11, 18, 0.4) 50%, rgba(13, 11, 18, 0.85) 100%);
+    z-index: 1;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, transparent 15%, rgba(13, 11, 18, 0.9) 85%);
+    pointer-events: none; /* Allows click testing to pass straight to button layers */
     z-index: 1;
 }
 
@@ -210,17 +237,15 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
     position: relative;
     z-index: 2;
     
-    /* Fluid constraints to eliminate device edge clipping */
     width: 100%;
     max-width: 440px; 
     
-    /* Fluid Spacing Grid Matrix */
-    margin-left: max(var(--spacing-md), 10%); /* Keeps a safe 10% desktop alignment, fallback to 16px padding on mobile */
-    margin-right: var(--spacing-md);          /* Safe right margin prevents right-side viewport collision */
+    margin-left: max(var(--spacing-md), 10%);
+    margin-right: var(--spacing-md);
     
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Keeps text aligned left while centering the button components */
+    align-items: flex-start;
     gap: var(--spacing-md);
 }
 
@@ -245,7 +270,19 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
 }
 
 #hero__content--highlight {
-    color: var(--color-text-accent);
+    background: linear-gradient(
+        135deg, 
+        #bca8f0 0%,
+        var(--color-text-accent) 45%,
+        #c3b4e6 55%,
+        var(--color-accent-secondary) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;      
+    
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85));
 }
 
 .hero__description {
@@ -257,31 +294,42 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
 }
 
 .hero__content button {
-    width: fit-content; /* Collapses the button tightly around its internal content */
+    width: fit-content;
     background-color: var(--color-background-secondary);
     color: var(--color-text-primary);
     font-family: var(--font-family-main);
     font-size: var(--font-size-md);
-    padding: var(--spacing-md) var(--spacing-lg); /* Increased horizontal padding for a balanced layout */
+    padding: var(--spacing-md) var(--spacing-lg);
     border: 1px solid var(--color-accent-primary);
     border-radius: var(--radius-sm);
     box-shadow: 0 0 12px var(--color-accent-glow);
-    
-    /* Inline Flex Centering Matrix */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-md); /* Keeps the icon exactly 16px away from the text */
-    
+    gap: var(--spacing-md);
     cursor: pointer;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+    
+    will-change: border-color, box-shadow, transform;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
 }
 
-.hero__content button:hover, .hero__content button:focus-visible {
+.hero__content button:hover {
     border-color: var(--color-accent-primary-hover);
-    box-shadow: 0 0 16px var(--color-accent-primary-hover);
-    transform: translateY(-1px); /* Subtle gothic interactive elevation lift */
-    outline: none;
+    box-shadow: 0 0 20px rgba(115, 93, 165, 0.6);
+    transform: translateY(-2px); /* Smooth interface card elevation lift */
+}
+
+.hero__content button:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+    border-color: var(--color-accent-primary-hover);
+    box-shadow: 0 0 20px rgba(115, 93, 165, 0.6);
+    transform: translateY(-2px);
+}
+
+.hero__content button:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 8px var(--color-accent-glow);
 }
 
 .hero__content button img {
@@ -293,6 +341,9 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
     filter: brightness(0) invert(1);
     margin: 0;
     padding: 0;
+    
+    will-change: transform, filter;
+    transition: transform var(--transition-base), filter var(--transition-base);
 }
 
 .hero__content button .button__text {
@@ -448,7 +499,22 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
     align-items: center;
     border-bottom: 1px solid var(--color-border);
     padding: var(--spacing-lg);
-    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+
+    will-change: background-color, border-color, box-shadow, transform;
+    transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.about__row:hover,
+.about__row:focus-within {
+    background: linear-gradient(90deg, rgba(95, 75, 139, 0.08) 0%, rgba(22, 19, 29, 0) 100%);
+    border-color: var(--color-accent-primary);
+    box-shadow: inset 0 0 0 0 var(--color-accent-primary), 0 4px 12px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+.about__row:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
 }
 
 .about__row:last-child {
@@ -474,6 +540,15 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
     object-fit: contain;
     margin-right: var(--spacing-md);
     filter: brightness(0) saturate(100%) invert(64%) sepia(16%) saturate(674%) hue-rotate(216deg);
+    
+    will-change: filter, transform;
+    transition: filter var(--transition-base), transform var(--transition-base);
+}
+
+.about__row:hover dt img,
+.about__row:focus-within dt img {
+    filter: brightness(0) saturate(100%) invert(80%) sepia(20%) saturate(1000%) hue-rotate(220deg);
+    transform: scale(1.12);
 }
 
 .about__row dt span {
@@ -483,7 +558,6 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
     letter-spacing: 0.05em;
 }
 
-/* Vertical separating pillar divider */
 .about__row dt::after {
     content: "";
     position: absolute;
@@ -499,10 +573,8 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
     width: 60%;
     color: var(--color-text-primary);
     font-family: var(--font-family-flare);
-    font-size: 1.15rem; /* Scaled up execution for optimized reading hierarchy */
+    font-size: 1.15rem;
 }
-
-/* ==== LEGACY MEDIA QUERIES (RETAINED UNTIL PHASE C) ==== */
 
 @media (max-width: 768px) {
     .about__info {
@@ -529,6 +601,29 @@ nav a:hover::after, nav a:focus-visible::after, [aria-current="page"]::after {
     }
     .about__row dd {
         width: 100%;
-        padding-left: 36px; /* Indents values past the width of icons */
+        padding-left: 36px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .banner img,
+    .hero__content button,
+    .about__row {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+
+@supports not (-webkit-background-clip: text) and not (background-clip: text) {
+    .banner h1,
+    .hero__manifesto {
+        color: var(--color-text-primary) !important;
+        background: none !important;
+    }
+    
+    #hero__content--highlight {
+        color: var(--color-text-accent) !important;
+        background: none !important;
     }
 }

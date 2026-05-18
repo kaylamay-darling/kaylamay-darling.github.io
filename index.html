@@ -7,9 +7,7 @@
     <title>Atrium | The Concourse of Kayla May</title>
   </head>
   <body>
-    <!-- Accessible Header Landmark Layer -->
     <header>
-      <!-- Retained original classes and attributes for JS Parallax compatibility -->
       <div class="banner">
         <img
           src="assets/banner.webp"
@@ -31,11 +29,7 @@
         </ul>
       </nav>
     </header>
-
-    <!-- Semantic Core Container (Replaces role="main" section override) -->
     <main class="hero">
-      <!-- Decorative background hidden from screen readers to prevent noise -->
-      <!-- Change this line in your HTML main hero section -->
       <img
         class="hero__background-image"
         src="assets/hero-background.webp"
@@ -63,8 +57,6 @@
         </button>
       </div>
     </main>
-
-    <!-- Semantic Section Context (Replaces role="complementary" section override) -->
     <section class="about" aria-labelledby="about-heading">
       <h2 id="about-heading" class="about__section-header">
         <span>About Me</span>
@@ -83,7 +75,6 @@
               />
             </div>
           </div>
-          <!-- Purely decorative flourishes completely isolated from screen readers -->
           <div class="about__pfp--flourish" aria-hidden="true">
             <img src="assets/olive-branch-flourish.webp" alt="" />
           </div>
@@ -91,31 +82,29 @@
             >"Invigorating my mind since 2005"</span
           >
         </div>
-
-        <!-- Semantic Definition List Structure for High-Utility Profile Metadata -->
         <dl class="about__container">
-          <div class="about__row">
+          <div class="about__row" tabindex="0">
             <dt>
               <img src="assets/name-icon.webp" alt="" aria-hidden="true" />
               <span>NAME</span>
             </dt>
             <dd>Kayla May</dd>
           </div>
-          <div class="about__row">
+          <div class="about__row" tabindex="0">
             <dt>
               <img src="assets/focus-icon.webp" alt="" aria-hidden="true" />
               <span>FOCUS</span>
             </dt>
             <dd>Front-end development</dd>
           </div>
-          <div class="about__row">
+          <div class="about__row" tabindex="0">
             <dt>
               <img src="assets/current-icon.webp" alt="" aria-hidden="true" />
               <span>CURRENT</span>
             </dt>
             <dd>Building interactive web apps</dd>
           </div>
-          <div class="about__row">
+          <div class="about__row" tabindex="0">
             <dt>
               <img
                 src="assets/philosophy-icon.webp"
@@ -126,7 +115,7 @@
             </dt>
             <dd>Theravāda buddhism</dd>
           </div>
-          <div class="about__row">
+          <div class="about__row" tabindex="0">
             <dt>
               <img
                 src="assets/relationship-icon.webp"
@@ -140,7 +129,6 @@
         </dl>
       </div>
     </section>
-
     <script src="script.js"></script>
   </body>
 </html>
