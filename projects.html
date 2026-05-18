@@ -8,20 +8,22 @@
     <title>Projects | The Concourse of Kayla May</title>
 </head>
 <body>
-
-    <header>
-        <div class="banner">
-            <img src="assets/banner.webp" width="513" height="257" alt="The Eiffel Tower rendered in a dark atmospheric style">
-            <h1>The Concourse of Kayla May</h1>
-        </div>
-        <nav aria-label="Main Navigation">
-            <ul>
-                <li><a href="index.html">Atrium</a></li>
-                <li><a href="projects.html" aria-current="page">Projects</a></li>
-                <li><a href="connects.html">Connects</a></li>
-            </ul>
-        </nav>
-    </header>
+<header class="global-header">
+    <div class="banner">
+        <img src="assets/banner.webp" width="513" height="257" alt="The Eiffel Tower rendered in a dark atmospheric style">
+        <h1>The Concourse of Kayla May</h1>
+    </div>
+   <nav class="nav-container" aria-label="Main Navigation">
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav__menu-list" aria-label="Menu">
+        ☰
+    </button>
+    <ul id="nav__menu-list" class="nav__list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Atrium</a></li>
+        <li class="nav__item"><a class="nav__link" href="projects.html" aria-current="page">Projects</a></li>
+        <li class="nav__item"><a class="nav__link" href="connects.html">Connects</a></li>
+    </ul>
+</nav>
+</header>
     <main class="projects-dashboard">
         <div class="projects__wrapper">
         </div>

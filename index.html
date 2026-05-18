@@ -9,28 +9,22 @@
 </head>
 
   <body>
-    <header>
-      <div class="banner">
-        <img
-          src="assets/banner.webp"
-          width="513"
-          height="257"
-          alt="The Eiffel Tower rendered in a dark atmospheric style"
-        />
+    <header class="global-header">
+    <div class="banner">
+        <img src="assets/banner.webp" width="513" height="257" alt="The Eiffel Tower rendered in a dark atmospheric style">
         <h1>The Concourse of Kayla May</h1>
-      </div>
-      <nav aria-label="Main Navigation">
-        <ul>
-          <li>
-            <a id="nav__current-page" href="index.html" aria-current="page"
-              >Atrium</a
-            >
-          </li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="connects.html">Connects</a></li>
-        </ul>
-      </nav>
-    </header>
+    </div>
+   <nav class="nav-container" aria-label="Main Navigation">
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav__menu-list" aria-label="Menu">
+        ☰
+    </button>
+    <ul id="nav__menu-list" class="nav__list">
+        <li class="nav__item"><a class="nav__link" href="index.html" aria-current="page">Atrium</a></li>
+        <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
+        <li class="nav__item"><a class="nav__link" href="connects.html">Connects</a></li>
+    </ul>
+</nav>
+</header>
     <main class="hero">
       <img
         class="hero__background-image"
@@ -88,7 +82,7 @@
           <div class="about__row" tabindex="0">
             <dt>
               <img src="assets/name-icon.webp" alt="" aria-hidden="true" />
-              <span>NAME</span>
+              <span>SELF</span>
             </dt>
             <dd>Kayla May</dd>
           </div>

@@ -1,3 +1,5 @@
+/* ==== HERO ==== */
+
 .hero {
     position: relative;
     width: 100%;
@@ -155,7 +157,7 @@
     display: inline-block;
 }
 
-/* ==== ABOUT SECTION ==== */
+/* ==== ABOUT ==== */
 
 .about {
     position: relative;
@@ -281,7 +283,7 @@
     text-align: center;
 }
 
-/* ==== SEMANTIC PROPERTY METADATA LIST ==== */
+/* ==== ABOUT METADATA ==== */
 
 .about__container {
     width: 100%;
@@ -378,6 +380,8 @@
     font-size: 1.15rem;
 }
 
+/* ==== MEDIA QUERIES ==== */
+
 @media (max-width: 768px) {
     .about__info {
         flex-direction: column;
@@ -417,13 +421,9 @@
     }
 }
 
-@supports not (-webkit-background-clip: text) and not (background-clip: text) {
-    .banner h1,
-    .hero__manifesto {
-        color: var(--color-text-primary) !important;
-        background: none !important;
-    }
-    
+/* ==== COMPLIANCE FALLBACK MATRIX ==== */
+
+@supports (not (-webkit-background-clip: text)) and (not (background-clip: text)) {
     #hero__content--highlight {
         color: var(--color-text-accent) !important;
         background: none !important;
