@@ -1,9 +1,5 @@
-/**
- * Atrium Landing Page Core Engine
- * Architecture: Optimized Parallax, Nav Drawer, and Grid Accordion
- */
+/* ==== BANNER PARALLAX ==== */
 
-// Global state tracking to isolate Layout Reads from Style Writes
 let parallaxState = {
     banner: null,
     bannerImage: null,
@@ -12,17 +8,18 @@ let parallaxState = {
     imageReady: false
 };
 
+// Initialize parallax engine on DOMContentLoaded to ensure elements are available
 function initParallaxEngine() {
     parallaxState.banner = document.querySelector(".banner");
     parallaxState.bannerImage = document.querySelector(".banner img");
 
     if (!parallaxState.banner || !parallaxState.bannerImage) return;
 
+    // Recalculate parallax parameters
     const runRecalc = () => {
         const img = parallaxState.bannerImage;
         const container = parallaxState.banner;
         
-        // Prevent division-by-zero errors if the image hasn't loaded dimensions
         if (img.naturalWidth === 0) return;
         
         parallaxState.imageReady = true;
@@ -30,7 +27,6 @@ function initParallaxEngine() {
         requestTick();
     };
 
-    // Safely recalculate layout metrics only after assets have explicitly loaded
     if (parallaxState.bannerImage.complete) {
         runRecalc();
     } else {
@@ -41,6 +37,7 @@ function initParallaxEngine() {
     window.addEventListener("scroll", requestTick, { passive: true });
 }
 
+// Request the next animation frame
 function requestTick() {
     if (!parallaxState.ticking && parallaxState.imageReady) {
         requestAnimationFrame(updateParallaxPosition);
@@ -48,27 +45,26 @@ function requestTick() {
     }
 }
 
+// Update the parallax position based on scroll progress
 function updateParallaxPosition() {
-    // Read operations (Cached or highly optimized window properties)
     const windowY = window.scrollY;
     const windowH = window.innerHeight;
-    const docH = document.documentElement.scrollHeight; // Faster lookup target than document.body
+    const docH = document.documentElement.scrollHeight; 
     
     const maxScroll = docH - windowH;
     const progress = maxScroll > 0 ? windowY / maxScroll : 0;
     const parallax = progress * -parallaxState.maxOffset;
 
-    // Write operations (Batched neatly to prevent browser layout thrashing)
     parallaxState.bannerImage.style.objectPosition = `center ${parallax}px`;
     parallaxState.ticking = false;
 }
 
-// Initialize structural UI interactions securely on DOM load
+/* ==== NAVIGATION DRAWER ==== */
+
+// Initialize navigation drawer and related event listeners on DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
-    // Run the high-efficiency background animation engine
     initParallaxEngine();
 
-    /* ==== SECTION 1: GLOBAL NAVIGATION DRAWER ==== */
     const navContainer = document.querySelector(".nav-container");
     const navToggle = document.querySelector(".nav__toggle");
     const navList = document.querySelector(".nav__list");
@@ -81,12 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const toggleDrawer = () => {
             const isOpen = !navContainer.classList.contains("nav-container--open");
             
+            // Toggle ARIA attributes and classes based on the new state
             if (isOpen) {
                 navContainer.classList.add("nav-container--open");
                 navToggle.setAttribute("aria-expanded", "true");
                 navToggle.setAttribute("aria-label", "Close Menu");
                 
-                // Accessible focus shifting with modern microtask routing
+                // Focus the first link in the drawer after it opens
                 queueMicrotask(() => {
                     if (firstFocusable) firstFocusable.focus();
                 });
@@ -99,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         navToggle.addEventListener("click", toggleDrawer);
 
+        // Handle keyboard navigation and focus trapping within the drawer
         navContainer.addEventListener("keydown", (e) => {
             if (!navContainer.classList.contains("nav-container--open")) return;
 
@@ -124,9 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* ==== SECTION 2: METADATA ACCORDION ENGINE ==== */
+/* ==== ABOUT TABLE ACCORDION ==== */
+
+// Inititalize toggle accordion functionality for the about table on DOMContentLoaded
     const selfToggleRow = document.querySelector(".about__row--expandable");
     
+    // Check if the toggle row exists and has the necessary ARIA attribute
     if (selfToggleRow) {
         const controlledAttr = selfToggleRow.getAttribute("aria-controls");
         if (!controlledAttr) return;
@@ -134,20 +135,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const controlledIds = controlledAttr.split(" ");
         const subRows = controlledIds.map(id => document.getElementById(id)).filter(Boolean);
 
+        // Toggle accordion state and update ARIA attributes accordingly
         const toggleSelfAccordion = () => {
             const isCurrentlyExpanded = selfToggleRow.getAttribute("aria-expanded") === "true";
             const newExpandedState = !isCurrentlyExpanded;
 
             selfToggleRow.setAttribute("aria-expanded", newExpandedState.toString());
 
+            // Update sub-rows visibility and ARIA attributes based on the new state
             subRows.forEach(subRow => {
-                // Toggle classes to feed your index-styles.css transition rules
                 if (newExpandedState) {
                     subRow.classList.add("is-expanded");
                     subRow.setAttribute("aria-hidden", "false");
                     subRow.setAttribute("tabindex", "0");
                     
-                    // Hardware accelerated layout synchronization trigger
                     void subRow.offsetHeight; 
                 } else {
                     subRow.classList.remove("is-expanded");
@@ -157,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         };
 
+        // Handle click and keyboard events on the toggle row, ensuring sub-row interactions don't trigger the toggle
         selfToggleRow.addEventListener("click", (e) => {
             if (e.target.closest(".about__row--sub")) return;
             toggleSelfAccordion();
@@ -167,6 +169,105 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (e.target.closest(".about__row--sub")) return;
                 e.preventDefault();
                 toggleSelfAccordion();
+            }
+        });
+    }
+
+    /* ==== GALLERY TRIGGER AND THUMBNAIL MODALITY ==== */
+
+    // Cache gallery and modal elements
+    const galleryTrigger = document.querySelector(".gallery__trigger");
+    const galleryTrack = document.getElementById("gallery__feed-track");
+    const modalPortal = document.getElementById("gallery-modal");
+    const modalImage = modalPortal ? modalPortal.querySelector(".modal-portal__image") : null;
+    const modalCaption = modalPortal ? modalPortal.querySelector(".modal-portal__caption") : null;
+    const modalCloseBtn = modalPortal ? modalPortal.querySelector(".modal-portal__close-btn") : null;
+    const modalBackdrop = modalPortal ? modalPortal.querySelector(".modal-portal__backdrop") : null;
+
+    let activeTriggerButton = null;
+
+    // Handle gallery trigger button click to toggle gallery visibility and manage ARIA attributes
+    if (galleryTrigger && galleryTrack) {
+        galleryTrigger.addEventListener("click", () => {
+            const isExpanded = galleryTrigger.getAttribute("aria-expanded") === "true";
+            const newExpandedState = !isExpanded;
+
+            galleryTrigger.setAttribute("aria-expanded", newExpandedState.toString());
+            galleryTrack.setAttribute("aria-hidden", isExpanded.toString());
+
+            if (newExpandedState) {
+                const firstZoomBtn = galleryTrack.querySelector(".gallery__zoom-btn");
+                if (firstZoomBtn) {
+                    queueMicrotask(() => firstZoomBtn.focus());
+                }
+            }
+        });
+
+        galleryTrack.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                galleryTrigger.click();
+                galleryTrigger.focus();
+            }
+        });
+    }
+
+    // Function to open the modal portal with the selected image and manage focus and ARIA attributes
+    const openModalPortal = (src, alt) => {
+        if (!modalPortal || !modalImage) return;
+        
+        // Inherit the alt and src from the thumbnail
+        modalImage.src = src;
+        modalImage.alt = alt;
+
+        modalPortal.classList.add("modal--open");
+        modalPortal.setAttribute("aria-hidden", "false");
+        modalPortal.removeAttribute("tabindex");
+
+        modalCaption.textContent = alt;
+        
+        document.body.style.overflow = "hidden";
+        
+        queueMicrotask(() => {
+            if (modalCloseBtn) modalCloseBtn.focus();
+        });
+    };
+
+    // Close the modal portal and restore focus to the triggering button, while managing ARIA attributes and scroll behavior
+    const closeModalPortal = () => {
+        if (!modalPortal || !modalPortal.classList.contains("modal--open")) return;
+        
+        modalPortal.classList.remove("modal--open");
+        modalPortal.setAttribute("aria-hidden", "true");
+        modalPortal.setAttribute("tabindex", "-1");
+
+        document.body.style.overflow = "";
+
+        if (activeTriggerButton) {
+            activeTriggerButton.focus();
+            activeTriggerButton = null;
+        }
+    };
+
+    if (galleryTrack && modalPortal) {
+        // Handle click events on the gallery track
+        galleryTrack.addEventListener("click", (e) => {
+            const zoomBtn = e.target.closest(".gallery__zoom-btn");
+            if (!zoomBtn) return;
+
+            const thumbnailImg = zoomBtn.querySelector("img");
+            if (!thumbnailImg) return;
+
+            activeTriggerButton = zoomBtn;
+            openModalPortal(thumbnailImg.src, thumbnailImg.alt);
+        });
+
+        // Handle modal close button and backdrop clicks, as well as Escape key press to close the modal
+        if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeModalPortal);
+        if (modalBackdrop) modalBackdrop.addEventListener("click", closeModalPortal);
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && modalPortal.classList.contains("modal--open")) {
+                closeModalPortal();
             }
         });
     }
