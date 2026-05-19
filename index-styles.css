@@ -400,42 +400,63 @@
     will-change: transform;
 }
 
+/* ==== ABOUT METADATA ACCORDION HANDLER ==== */
+
+.about__row--expandable {
+    cursor: pointer;
+}
+
+.about__row--expandable dd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.about__drawer-indicator {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-base), color var(--transition-base);
+    will-change: transform;
+}
+
 .about__row--sub {
-    display: grid !important; 
-    grid-template-rows: 0fr;
+    display: block !important; 
+    max-height: 0;
+    overflow: hidden;
     padding: 0 !important; 
     border-bottom: none !important;
-    
     background-color: var(--color-background-primary) !important; 
     
-    will-change: grid-template-rows;
-    transition: grid-template-rows 300ms cubic-bezier(0.25, 1, 0.5, 1);
+    visibility: hidden;
+    
+    will-change: max-height, visibility;
+    transition: max-height 300ms cubic-bezier(0.25, 1, 0.5, 1),
+                visibility 300ms step-end;
 }
 
 .about__row--sub dt,
 .about__row--sub dd {
+    margin: 0;
     min-height: 0; 
 }
 
 .about__row-inner {
     overflow: hidden;
     width: 100%;
-    
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0 var(--spacing-lg);
-    border-bottom: 0 solid transparent;
+    box-sizing: border-box;
 
     opacity: 0;
     transform: translateY(-12px);
-    will-change: transform, opacity, padding, border-color;
+    will-change: transform, opacity;
     
     transition: 
-        padding 300ms cubic-bezier(0.25, 1, 0.5, 1),
-        opacity 240ms cubic-bezier(0.33, 1, 0.68, 1) 40ms,
-        transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1) 40ms,
-        border-color 150ms ease;
+        opacity 200ms ease-out,
+        transform 250ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .about__row--sub dt {
@@ -468,7 +489,7 @@
     right: var(--spacing-lg);
     top: 50%;
     width: 1px;
-    height: 15px; /* Scaled down 25% from 20px to perfectly track icon heights */
+    height: 15px; 
     background: var(--color-border);
     transform: translateY(-50%);
 }
@@ -477,10 +498,9 @@
     width: 60%;
     color: var(--color-text-primary);
     font-family: var(--font-family-flare);
-    font-size: 0.9rem; /* Scaled down proportionally from 1.15rem */
+    font-size: 0.9rem; 
 }
 
-/* Hover effects for sub-row child items */
 .about__row--sub:hover .about__row-inner {
     background: linear-gradient(90deg, rgba(95, 75, 139, 0.04) 0%, rgba(22, 19, 29, 0) 100%);
 }
@@ -490,62 +510,43 @@
     transform: scale(1.08);
 }
 
-/* ==========================================================================
-   ACTIVE OPEN ACCORDION TRANSFORMATION SELECTORS
-   ========================================================================== */
-
-/* Active indicator glyph rotation */
 .about__row--expandable[aria-expanded="true"] .about__drawer-indicator {
     transform: rotate(90deg);
     color: var(--color-text-accent);
 }
 
-/* Open the structural grid track space */
 .about__row--expandable[aria-expanded="true"] ~ .about__row--sub {
-    grid-template-rows: 1fr;
+    max-height: 200px; 
+    visibility: visible;
+    border-bottom: 1px solid var(--color-border) !important;
+    transition: max-height 300ms cubic-bezier(0.25, 1, 0.5, 1),
+                visibility 0s step-start;
 }
 
-/* Deploy the translation layers safely within the open grid tracks */
 .about__row--expandable[aria-expanded="true"] ~ .about__row--sub .about__row-inner {
-    /* Reduced vertical padding from 32px (lg) down to 24px to match the 75% height target */
     padding-top: 25px;
     padding-bottom: 25px;
-    border-bottom: 1px solid var(--color-border);
     opacity: 1;
     transform: translateY(0); 
 }
 
-@container about-card (max-width: 480px) {
-    .about__row--sub .about__row-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-sm);
-        padding: 0 var(--spacing-lg); 
-        
-        padding-top: var(--spacing-sm);
-        padding-bottom: var(--spacing-sm);
-        
-        min-height: min-content;
-    }
-    
-    .about__row--sub dt {
-        width: 100%;
-    }
-    
-    .about__row--sub dt::after {
-        display: none; 
-    }
-    
-    .about__row--sub dd {
-        width: 100%;
-        padding-left: 36px; 
-    }
+.about {
+    container-type: inline-size;
+    container-name: about-section;
 }
 
-/* ==== MEDIA QUERIES ==== */
+.about__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-@media (max-width: 768px) {
+@container about-section (max-width: 768px) {
     .about__info {
         flex-direction: column;
         align-items: center;
@@ -555,7 +556,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@container about-section (max-width: 480px) {
     .about__row:not(.about__row--sub) {
         display: flex;
         flex-direction: column;
@@ -572,8 +573,31 @@
         width: 100%;
         padding-left: 36px;
     }
-}
 
+    .about__row--sub .about__row-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        padding: 0 var(--spacing-lg); 
+    }
+    .about__row--sub dt {
+        width: 100%;
+    }
+    .about__row--sub dt::after {
+        display: none !important; 
+    }
+    .about__row--sub dd {
+        width: 100%;
+        padding-left: 36px; 
+    }
+    .about__row--expandable[aria-expanded="true"] ~ .about__row--sub {
+        max-height: 250px;
+    }
+    .about__row--expandable[aria-expanded="true"] ~ .about__row--sub .about__row-inner {
+        padding-top: var(--spacing-sm);
+        padding-bottom: var(--spacing-sm);
+    }
+}
 
 @media (prefers-reduced-motion: reduce) {
     .banner img,
@@ -584,7 +608,6 @@
         animation: none !important;
     }
 }
-
 /* ==== COMPLIANCE FALLBACK MATRIX ==== */
 
 @supports (not (-webkit-background-clip: text)) and (not (background-clip: text)) {
