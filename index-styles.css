@@ -515,21 +515,18 @@
     transform: translateY(0); 
 }
 
-/* ==========================================================================
-   ADAPTIVE CONTAINER METRICS FOR MOBILE BREAKPOINTS
-   ========================================================================== */
-
 @container about-card (max-width: 480px) {
     .about__row--sub .about__row-inner {
+        display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: var(--spacing-sm);
-        padding: 0 var(--spacing-lg); /* Maintains exact unified padding bounds */
-    }
-    
-    .about__row--sub .about__row-inner {
+        padding: 0 var(--spacing-lg); 
+        
         padding-top: var(--spacing-sm);
         padding-bottom: var(--spacing-sm);
+        
+        min-height: min-content;
     }
     
     .about__row--sub dt {
@@ -542,7 +539,7 @@
     
     .about__row--sub dd {
         width: 100%;
-        padding-left: 36px; /* Matches layout alignment of standard stacked description markers */
+        padding-left: 36px; 
     }
 }
 
@@ -559,23 +556,24 @@
 }
 
 @media (max-width: 480px) {
-    .about__row {
+    .about__row:not(.about__row--sub) {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: var(--spacing-sm);
     }
-    .about__row dt {
+    .about__row:not(.about__row--sub) dt {
         width: 100%;
     }
-    .about__row dt::after {
+    .about__row:not(.about__row--sub) dt::after {
         display: none;
     }
-    .about__row dd {
+    .about__row:not(.about__row--sub) dd {
         width: 100%;
         padding-left: 36px;
     }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
     .banner img,

@@ -1,136 +1,173 @@
-const banner = document.querySelector(".banner");
-const bannerImage = document.querySelector(".banner img")
+/**
+ * Atrium Landing Page Core Engine
+ * Architecture: Optimized Parallax, Nav Drawer, and Grid Accordion
+ */
 
-let maxOffset = 0;
+// Global state tracking to isolate Layout Reads from Style Writes
+let parallaxState = {
+    banner: null,
+    bannerImage: null,
+    maxOffset: 0,
+    ticking: false,
+    imageReady: false
+};
 
-function updateMaxOffset() {
-    maxOffset = (bannerImage.naturalHeight / bannerImage.naturalWidth) * bannerImage.offsetWidth - banner.offsetHeight;
+function initParallaxEngine() {
+    parallaxState.banner = document.querySelector(".banner");
+    parallaxState.bannerImage = document.querySelector(".banner img");
+
+    if (!parallaxState.banner || !parallaxState.bannerImage) return;
+
+    const runRecalc = () => {
+        const img = parallaxState.bannerImage;
+        const container = parallaxState.banner;
+        
+        // Prevent division-by-zero errors if the image hasn't loaded dimensions
+        if (img.naturalWidth === 0) return;
+        
+        parallaxState.imageReady = true;
+        parallaxState.maxOffset = (img.naturalHeight / img.naturalWidth) * img.offsetWidth - container.offsetHeight;
+        requestTick();
+    };
+
+    // Safely recalculate layout metrics only after assets have explicitly loaded
+    if (parallaxState.bannerImage.complete) {
+        runRecalc();
+    } else {
+        parallaxState.bannerImage.addEventListener("load", runRecalc);
+    }
+
+    window.addEventListener("resize", runRecalc, { passive: true });
+    window.addEventListener("scroll", requestTick, { passive: true });
 }
 
-// Update parallax position based on scroll progress
-function updateParallax() {
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-    const parallax = progress * -maxOffset;
-
-    bannerImage.style.objectPosition = `center ${parallax}px`;
+function requestTick() {
+    if (!parallaxState.ticking && parallaxState.imageReady) {
+        requestAnimationFrame(updateParallaxPosition);
+        parallaxState.ticking = true;
+    }
 }
 
-// Initialize on load, update on resize and scroll
-window.addEventListener("load", () => {
-    updateMaxOffset();
-    updateParallax();
-});
+function updateParallaxPosition() {
+    // Read operations (Cached or highly optimized window properties)
+    const windowY = window.scrollY;
+    const windowH = window.innerHeight;
+    const docH = document.documentElement.scrollHeight; // Faster lookup target than document.body
+    
+    const maxScroll = docH - windowH;
+    const progress = maxScroll > 0 ? windowY / maxScroll : 0;
+    const parallax = progress * -parallaxState.maxOffset;
 
-window.addEventListener("resize", () => {
-    updateMaxOffset();
-    updateParallax();
-});
+    // Write operations (Batched neatly to prevent browser layout thrashing)
+    parallaxState.bannerImage.style.objectPosition = `center ${parallax}px`;
+    parallaxState.ticking = false;
+}
 
-window.addEventListener("scroll", updateParallax);
-
-// Initialize navigation drawer interaction on DOM load
+// Initialize structural UI interactions securely on DOM load
 document.addEventListener("DOMContentLoaded", () => {
+    // Run the high-efficiency background animation engine
+    initParallaxEngine();
+
+    /* ==== SECTION 1: GLOBAL NAVIGATION DRAWER ==== */
     const navContainer = document.querySelector(".nav-container");
     const navToggle = document.querySelector(".nav__toggle");
     const navList = document.querySelector(".nav__list");
 
-    // Fallback check for non-compliant environments
-    if (!navToggle || !navContainer || !navList) return;
+    if (navToggle && navContainer && navList) {
+        const navLinks = navList.querySelectorAll(".nav__link");
+        const firstFocusable = navLinks[0];
+        const lastFocusable = navLinks[navLinks.length - 1];
 
-    // Cache focusable elements for keyboard navigation
-    const navLinks = navList.querySelectorAll(".nav__link");
-    const firstFocusable = navLinks[0];
-    const lastFocusable = navLinks[navLinks.length - 1];
-
-    function toggleDrawer() {
-        const isOpen = !navContainer.classList.contains("nav-container--open");
-        
-        // Toggle drawer HTML state integration with ARIA attributes
-        if (isOpen) {
-            navContainer.classList.add("nav-container--open");
-            navToggle.setAttribute("aria-expanded", "true");
-            navToggle.setAttribute("aria-label", "Close");
+        const toggleDrawer = () => {
+            const isOpen = !navContainer.classList.contains("nav-container--open");
             
-            // Focus the first link in drawer
-            setTimeout(() => {
-                if (firstFocusable) firstFocusable.focus();
-            }, 50); 
-        } else {
-            // Closer drawer and reset ARIA attributes
-            navContainer.classList.remove("nav-container--open");
-            navToggle.setAttribute("aria-expanded", "false");
-            navToggle.setAttribute("aria-label", "Menu");
-        }
-    }
-
-    // Toggle drawer on click
-    navToggle.addEventListener("click", () => toggleDrawer());
-
-    // Keyboard escape and tab focus management
-    navContainer.addEventListener("keydown", (e) => {
-        const isDrawerOpen = navContainer.classList.contains("nav-container--open");
-        if (!isDrawerOpen) return;
-
-        if (e.key === "Escape") {
-            navContainer.classList.remove("nav-container--open");
-            navToggle.setAttribute("aria-expanded", "false");
-            navToggle.setAttribute("aria-label", "Menu");
-            navToggle.focus();
-            return;
-        }
-
-        if (e.key === "Tab") {
-            if (e.shiftKey) { 
-                if (document.activeElement === firstFocusable || document.activeElement === navToggle) {
-                    if (lastFocusable) lastFocusable.focus();
-                    e.preventDefault();
-                }
-            } else { 
-                if (document.activeElement === lastFocusable) {
-                    navToggle.focus();
-                    e.preventDefault();
-                }
-            }
-        }
-    });
-});
-
-// Initialize toggle accordion interaction
-const selfToggleRow = document.querySelector(".about__row--expandable");
-if (selfToggleRow) {
-    const controlledIds = selfToggleRow.getAttribute("aria-controls").split(" ");
-    const subRows = controlledIds.map(id => document.getElementById(id)).filter(Boolean);
-
-    function toggleSelfAccordion() {
-        const isCurrentlyExpanded = selfToggleRow.getAttribute("aria-expanded") === "true";
-        const newExpandedState = !isCurrentlyExpanded;
-
-        selfToggleRow.setAttribute("aria-expanded", newExpandedState.toString());
-
-        // Update sub-rows visibility and keyboard accessibility
-        subRows.forEach(subRow => {
-            subRow.setAttribute("aria-hidden", isCurrentlyExpanded.toString());
-
-            if (newExpandedState) {
-                subRow.setAttribute("tabindex", "0");
+            if (isOpen) {
+                navContainer.classList.add("nav-container--open");
+                navToggle.setAttribute("aria-expanded", "true");
+                navToggle.setAttribute("aria-label", "Close Menu");
+                
+                // Accessible focus shifting with modern microtask routing
+                queueMicrotask(() => {
+                    if (firstFocusable) firstFocusable.focus();
+                });
             } else {
-                subRow.removeAttribute("tabindex");
+                navContainer.classList.remove("nav-container--open");
+                navToggle.setAttribute("aria-expanded", "false");
+                navToggle.setAttribute("aria-label", "Open Menu");
+            }
+        };
+
+        navToggle.addEventListener("click", toggleDrawer);
+
+        navContainer.addEventListener("keydown", (e) => {
+            if (!navContainer.classList.contains("nav-container--open")) return;
+
+            if (e.key === "Escape") {
+                toggleDrawer();
+                navToggle.focus();
+                return;
+            }
+
+            if (e.key === "Tab") {
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusable || document.activeElement === navToggle) {
+                        if (lastFocusable) lastFocusable.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusable) {
+                        navToggle.focus();
+                        e.preventDefault();
+                    }
+                }
             }
         });
     }
 
-    // Toggle accordion on click and key events, ignoring sub-rows
-    selfToggleRow.addEventListener("click", (e) => {
-        if (e.target.closest(".about__row--sub")) return;
-        toggleSelfAccordion();
-    });
+    /* ==== SECTION 2: METADATA ACCORDION ENGINE ==== */
+    const selfToggleRow = document.querySelector(".about__row--expandable");
+    
+    if (selfToggleRow) {
+        const controlledAttr = selfToggleRow.getAttribute("aria-controls");
+        if (!controlledAttr) return;
 
-    selfToggleRow.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
+        const controlledIds = controlledAttr.split(" ");
+        const subRows = controlledIds.map(id => document.getElementById(id)).filter(Boolean);
+
+        const toggleSelfAccordion = () => {
+            const isCurrentlyExpanded = selfToggleRow.getAttribute("aria-expanded") === "true";
+            const newExpandedState = !isCurrentlyExpanded;
+
+            selfToggleRow.setAttribute("aria-expanded", newExpandedState.toString());
+
+            subRows.forEach(subRow => {
+                // Toggle classes to feed your index-styles.css transition rules
+                if (newExpandedState) {
+                    subRow.classList.add("is-expanded");
+                    subRow.setAttribute("aria-hidden", "false");
+                    subRow.setAttribute("tabindex", "0");
+                    
+                    // Hardware accelerated layout synchronization trigger
+                    void subRow.offsetHeight; 
+                } else {
+                    subRow.classList.remove("is-expanded");
+                    subRow.setAttribute("aria-hidden", "true");
+                    subRow.removeAttribute("tabindex");
+                }
+            });
+        };
+
+        selfToggleRow.addEventListener("click", (e) => {
             if (e.target.closest(".about__row--sub")) return;
-            e.preventDefault();
             toggleSelfAccordion();
-        }
-    });
-}
+        });
+
+        selfToggleRow.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                if (e.target.closest(".about__row--sub")) return;
+                e.preventDefault();
+                toggleSelfAccordion();
+            }
+        });
+    }
+});
