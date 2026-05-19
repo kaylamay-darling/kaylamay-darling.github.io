@@ -95,3 +95,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// Initialize toggle accordion interaction
+const selfToggleRow = document.querySelector(".about__row--expandable");
+if (selfToggleRow) {
+    const controlledIds = selfToggleRow.getAttribute("aria-controls").split(" ");
+    const subRows = controlledIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    function toggleSelfAccordion() {
+        const isCurrentlyExpanded = selfToggleRow.getAttribute("aria-expanded") === "true";
+        const newExpandedState = !isCurrentlyExpanded;
+
+        selfToggleRow.setAttribute("aria-expanded", newExpandedState.toString());
+
+        // Update sub-rows visibility and keyboard accessibility
+        subRows.forEach(subRow => {
+            subRow.setAttribute("aria-hidden", isCurrentlyExpanded.toString());
+
+            if (newExpandedState) {
+                subRow.setAttribute("tabindex", "0");
+            } else {
+                subRow.removeAttribute("tabindex");
+            }
+        });
+    }
+
+    // Toggle accordion on click and key events, ignoring sub-rows
+    selfToggleRow.addEventListener("click", (e) => {
+        if (e.target.closest(".about__row--sub")) return;
+        toggleSelfAccordion();
+    });
+
+    selfToggleRow.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            if (e.target.closest(".about__row--sub")) return;
+            e.preventDefault();
+            toggleSelfAccordion();
+        }
+    });
+}

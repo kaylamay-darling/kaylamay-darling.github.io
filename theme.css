@@ -123,10 +123,10 @@ header {
 }
 
 main {
-    margin-top: 198px; 
+    padding-top: 198px;
+    display: block;
+    width: 100%;
 }
-
-/* ==== GLOBAL NAVIGATION CONTROLLER ==== */
 
 .nav-container {
     position: relative;
@@ -266,16 +266,21 @@ main {
         background-color: var(--color-background-secondary);
         box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85);
         
+        border-left: 1px solid var(--color-border);
+        border-right: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+
         z-index: 100; 
 
         clip-path: inset(0 0 100% 0);
         opacity: 0;
         pointer-events: none;
-        
+
         transform: none !important; 
         will-change: clip-path, opacity;
         transition: clip-path var(--transition-base), opacity var(--transition-base);
     }
+
 
     .nav-container--open .nav__list {
         clip-path: inset(0 0 0% 0); 

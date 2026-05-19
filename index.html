@@ -7,124 +7,145 @@
     <link rel="stylesheet" href="index-styles.css">
     <title>Atrium | The Concourse of Kayla May</title>
 </head>
-
   <body>
     <header class="global-header">
-    <div class="banner">
-        <img src="assets/banner.webp" width="513" height="257" alt="The Eiffel Tower rendered in a dark atmospheric style">
-        <h1>The Concourse of Kayla May</h1>
-    </div>
-   <nav class="nav-container" aria-label="Main Navigation">
-    <button class="nav__toggle" aria-expanded="false" aria-controls="nav__menu-list" aria-label="Menu">
-        ☰
-    </button>
-    <ul id="nav__menu-list" class="nav__list">
-        <li class="nav__item"><a class="nav__link" href="index.html" aria-current="page">Atrium</a></li>
-        <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
-        <li class="nav__item"><a class="nav__link" href="connects.html">Connects</a></li>
-    </ul>
-</nav>
-</header>
-    <main class="hero">
-      <img
-        class="hero__background-image"
-        src="assets/hero-background.webp"
-        width="1899"
-        height="828"
-        alt=""
-        aria-hidden="true"
-        loading="eager"
-      />
-
-      <div class="hero__content">
-        <h2>Welcome to the atrium.</h2>
-        <p class="hero__manifesto">
-          <span>Conception.</span>
-          <span>Contrivance.</span>
-          <span id="hero__content--highlight">Catharsis.</span>
-        </p>
-        <p class="hero__description">
-          This is my concourse: an opus of my mind. Explore my projects, ideas,
-          and digital creations thus.
-        </p>
-        <button type="button">
-          <img src="assets/dice-icon.webp" alt="" aria-hidden="true" />
-          <span class="button__text">I'm feeling lucky!</span>
-        </button>
+      <div class="banner">
+          <img src="assets/banner.webp" width="513" height="257" alt="The Eiffel Tower rendered in a dark atmospheric style">
+          <h1>The Concourse of Kayla May</h1>
       </div>
-    </main>
-    <section class="about" aria-labelledby="about-heading">
-      <h2 id="about-heading" class="about__section-header">
-        <span>About Me</span>
-      </h2>
-
-      <div class="about__info">
-        <div class="about__pfp-card">
-          <div class="about__pfp--border">
-            <div class="about__pfp--bevel">
-              <img
-                src="assets/pfp.webp"
-                width="275"
-                height="367"
-                alt="Kayla May profile photo"
-                loading="lazy"
-              />
-            </div>
+      <nav class="nav-container" aria-label="Main Navigation">
+          <button class="nav__toggle" aria-expanded="false" aria-controls="nav__menu-list" aria-label="Menu">
+              ☰
+          </button>
+          <ul id="nav__menu-list" class="nav__list">
+              <li class="nav__item"><a class="nav__link" href="index.html" aria-current="page">Atrium</a></li>
+              <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
+              <li class="nav__item"><a class="nav__link" href="connects.html">Connects</a></li>
+          </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="hero">
+        <img
+          class="hero__background-image"
+          src="assets/hero-background.webp"
+          width="1899"
+          height="828"
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+        />
+        <div class="hero__content">
+          <h2>Welcome to the atrium.</h2>
+          <div class="hero__manifesto">
+            <span>Conception.</span>
+            <span>Contrivance.</span>
+            <span id="hero__content--highlight">Catharsis.</span>
           </div>
-          <div class="about__pfp--flourish" aria-hidden="true">
-            <img src="assets/olive-branch-flourish.webp" alt="" />
-          </div>
-          <span id="about__pfp--flourish-text"
-            >"Invigorating my mind since 2005"</span
-          >
+          <p class="hero__description">
+            This is my concourse: an opus of my mind. Explore my projects, ideas,
+            and digital creations thus.
+          </p>
+          <button type="button">
+            <img src="assets/dice-icon.webp" alt="" aria-hidden="true" />
+            <span class="button__text">I'm feeling lucky!</span>
+          </button>
         </div>
-        <dl class="about__container">
-          <div class="about__row" tabindex="0">
-            <dt>
-              <img src="assets/name-icon.webp" alt="" aria-hidden="true" />
-              <span>SELF</span>
-            </dt>
-            <dd>Kayla May</dd>
-          </div>
-          <div class="about__row" tabindex="0">
-            <dt>
-              <img src="assets/focus-icon.webp" alt="" aria-hidden="true" />
-              <span>FOCUS</span>
-            </dt>
-            <dd>Front-end development</dd>
-          </div>
-          <div class="about__row" tabindex="0">
-            <dt>
-              <img src="assets/current-icon.webp" alt="" aria-hidden="true" />
-              <span>CURRENT</span>
-            </dt>
-            <dd>Building interactive web apps</dd>
-          </div>
-          <div class="about__row" tabindex="0">
-            <dt>
-              <img
-                src="assets/philosophy-icon.webp"
-                alt=""
-                aria-hidden="true"
-              />
-              <span>PHILOSOPHY</span>
-            </dt>
-            <dd>Theravāda buddhism</dd>
-          </div>
-          <div class="about__row" tabindex="0">
-            <dt>
-              <img
-                src="assets/relationship-icon.webp"
-                alt=""
-                aria-hidden="true"
-              />
-              <span>RELATIONSHIP</span>
-            </dt>
-            <dd>Girlfriend</dd>
-          </div>
-        </dl>
       </div>
-    </section>
+
+      <section class="about" aria-labelledby="about-heading">
+        <h2 id="about-heading" class="about__section-header">
+          <span>About Me</span>
+        </h2>
+
+        <div class="about__info">
+          <div class="about__pfp-card">
+            <div class="about__pfp--border">
+              <div class="about__pfp--bevel">
+                <img
+                  src="assets/pfp.webp"
+                  width="275"
+                  height="367"
+                  alt="Kayla May profile photo"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="about__pfp--flourish" aria-hidden="true">
+              <img src="assets/olive-branch-flourish.webp" alt="" />
+            </div>
+            <span id="about__pfp--flourish-text">"Invigorating my mind since 2005"</span>
+          </div>
+          
+          <dl class="about__container">
+  <div class="about__row about__row--expandable" 
+       tabindex="0" 
+       role="button"
+       aria-expanded="false" 
+       aria-controls="self-subrow-pronouns self-subrow-relationship self-subrow-location self-subrow-philosophy">
+    <dt>
+      <img src="assets/name-icon.webp" alt="" aria-hidden="true" />
+      <span>SELF</span>
+    </dt>
+    <dd>
+      <span>Kayla May</span>
+      <span class="about__drawer-indicator" aria-hidden="true">◆</span>
+    </dd>
+  </div>
+  <div id="self-subrow-pronouns" class="about__row about__row--sub" aria-hidden="true">
+    <div class="about__row-inner">
+      <dt>
+        <img src="assets/pronouns-icon.webp" alt="" aria-hidden="true" />
+        <span>PRONOUNS</span>
+      </dt>
+      <dd>She / they</dd>
+    </div>
+  </div>
+  <div id="self-subrow-relationship" class="about__row about__row--sub" aria-hidden="true">
+    <div class="about__row-inner">
+      <dt>
+        <img src="assets/relationship-icon.webp" alt="" aria-hidden="true" />
+        <span>RELATIONSHIP</span>
+      </dt>
+      <dd>Girlfriend</dd>
+    </div>
+  </div>
+  <div id="self-subrow-location" class="about__row about__row--sub" aria-hidden="true">
+    <div class="about__row-inner">
+      <dt>
+        <img src="assets/location-icon.webp" alt="" aria-hidden="true" />
+        <span>LOCATION</span>
+      </dt>
+      <dd>United States</dd>
+    </div>
+  </div>
+  <div id="self-subrow-philosophy" class="about__row about__row--sub" aria-hidden="true">
+    <div class="about__row-inner">
+      <dt>
+        <img src="assets/philosophy-icon.webp" alt="" aria-hidden="true" />
+        <span>PHILOSOPHY</span>
+      </dt>
+      <dd>Theravāda buddhism</dd>
+    </div>
+  </div>
+  <div class="about__row" tabindex="0">
+    <dt>
+      <img src="assets/focus-icon.webp" alt="" aria-hidden="true" />
+      <span>FOCUS</span>
+    </dt>
+    <dd>Front-end development</dd>
+  </div>
+  <div class="about__row" tabindex="0">
+    <dt>
+      <img src="assets/current-icon.webp" alt="" aria-hidden="true" />
+      <span>CURRENT</span>
+    </dt>
+    <dd>Building interactive web apps</dd>
+  </div>
+</dl>
+        </div>
+      </section>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
