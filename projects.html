@@ -1,33 +1,224 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="projects-styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="projects-styles.css" />
     <title>Projects | The Concourse of Kayla May</title>
-</head>
-<body>
-<header class="global-header">
-    <div class="banner">
-        <img src="assets/banner.webp" width="513" height="257" alt="The Eiffel Tower rendered in a dark atmospheric style">
+  </head>
+  <body>
+    <header class="global-header">
+      <div class="banner">
+        <img
+          src="assets/banner.webp"
+          width="513"
+          height="257"
+          alt="The Eiffel Tower rendered in a dark atmospheric style"
+        />
         <h1>The Concourse of Kayla May</h1>
-    </div>
-   <nav class="nav-container" aria-label="Main Navigation">
-    <button class="nav__toggle" aria-expanded="false" aria-controls="nav__menu-list" aria-label="Menu">
-        ☰
-    </button>
-    <ul id="nav__menu-list" class="nav__list">
-        <li class="nav__item"><a class="nav__link" href="index.html">Atrium</a></li>
-        <li class="nav__item"><a class="nav__link" href="projects.html" aria-current="page">Projects</a></li>
-        <li class="nav__item"><a class="nav__link" href="connects.html">Connects</a></li>
-    </ul>
-</nav>
-</header>
+      </div>
+      <nav class="nav-container" aria-label="Main Navigation">
+        <button
+          class="nav__toggle"
+          aria-expanded="false"
+          aria-controls="nav__menu-list"
+          aria-label="Menu"
+        >
+          ☰
+        </button>
+        <ul id="nav__menu-list" class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="index.html">Atrium</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="projects.html" aria-current="page">Projects</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="connects.html">Connects</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
     <main class="projects-dashboard">
-        <div class="projects__wrapper">
+      <h2 id="projects-heading" class="projects__section-header">
+        <span>Projects</span>
+      </h2>
+
+<input type="checkbox" id="filter-toggle" class="state-filter-input" tabindex="-1"/>
+      
+      <!-- 2. CONTENT FILTERS: Radios that drive the visual state of the grid -->
+      <input type="radio" id="filter-all" name="portfolio-filter" class="state-filter-input" checked tabindex="-1" />
+      <input type="radio" id="filter-script" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
+      <input type="radio" id="filter-html" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
+      <input type="radio" id="filter-css" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
+      <input type="radio" id="filter-java" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
+      <input type="radio" id="filter-react" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
+
+      <!-- 2. Filter Dropdown Station (Inputs removed, replaced with clickable "for" targets) -->
+      <section class="filter-station" aria-label="Project Technology Filters">
+        <div class="filter-dropdown">
+         <button type="button" class="filter-dropdown__label" aria-haspopup="true" aria-expanded="false">
+  Filter
+</button>
+          <div class="filter-dropdown__options">
+            
+            <label for="filter-all" class="filter-btn" tabindex="0">
+    <span class="filter-btn__text">All</span>
+  </label>
+            
+            <label for="filter-script" class="filter-btn" tabindex="0">
+              <span class="tech-flare" data-tech="script" style="border: none; background: transparent; padding: 0">
+                <img src="assets/flare-script.webp" class="tech-flare__icon" alt="" aria-hidden="true" />
+              </span>
+              <span class="filter-btn__text">Script</span>
+            </label>
+            
+            <label for="filter-html" class="filter-btn" tabindex="0">
+              <span class="tech-flare" data-tech="html" style="border: none; background: transparent; padding: 0"
+              >
+                <img src="assets/flare-html.webp" class="tech-flare__icon" alt="" aria-hidden="true" />
+              </span>
+              <span class="filter-btn__text">HTML</span>
+            </label>
+            
+            <label for="filter-css" class="filter-btn" tabindex="0">
+              <span class="tech-flare" data-tech="css" style="border: none; background: transparent; padding: 0">
+                <img src="assets/flare-css.webp" class="tech-flare__icon" alt="" aria-hidden="true" />
+              </span>
+              <span class="filter-btn__text">CSS</span>
+            </label>
+            
+            <label for="filter-java" class="filter-btn" tabindex="0">
+              <span class="tech-flare" data-tech="java" style="border: none; background: transparent; padding: 0">
+                <img src="assets/flare-java.webp" class="tech-flare__icon" alt="" aria-hidden="true" />
+              </span>
+              <span class="filter-btn__text">Java</span>
+            </label>
+            
+            <label for="filter-react" class="filter-btn" tabindex="0">
+              <span class="tech-flare" data-tech="react" style="border: none; background: transparent; padding: 0">
+                <img src="assets/flare-react.webp" class="tech-flare__icon" alt="" aria-hidden="true" />
+              </span>
+              <span class="filter-btn__text">React</span>
+            </label>
+          </div>
         </div>
+      </section>
+      <div class="projects__wrapper">
+        <div class="project-grid">
+          <article class="project-card" data-tech="script java">
+            <time class="project-card__date" datetime="2026-05">MAR 2026 - MAY 2026</time>
+            <h2 class="project-card__title">Terra Nova</h2>
+            <div class="project-card__snapshot">
+              <img
+                src="assets/project-terranova.webp"
+                alt="Dashboard showing real-time data analytical telemetry modules"
+                loading="lazy"
+              />
+            </div>
+            <p class="project-card__description">
+                A Minecraft mod designed to refactor progression and world-building, while introducing subtle magic mechanics. It's written in a Java and script-based environment.
+            </p>
+            <div class="project-card__flares">
+              <span class="tech-flare" data-tech="script">
+                <img src="assets/flare-script.webp" alt="" class="tech-flare__icon" aria-hidden="true" />
+                <span class="tech-flare__text">Script</span>
+              </span>
+              <span class="tech-flare" data-tech="java">
+                <img src="assets/flare-java.webp" alt="" class="tech-flare__icon" aria-hidden="true" />
+                <span class="tech-flare__text">Java</span>
+              </span>
+            </div>
+            <footer class="project-card__actions">
+              <a href="https://github.com/kaylamay-darling/terranova" class="project-card__link" target="_blank" rel="noopener noreferrer" aria-label="View GitHub Repository">
+                <img src="assets/github-icon.webp" class="project-card__icon" alt="" aria-hidden="true" />
+              </a>
+              <div class="project-card__divider"></div>
+              <a href="https://x.com/kayladarling_xx" class="project-card__link" target="_blank" rel="noopener noreferrer" aria-label="View Live Project">
+                <img src="assets/external-link.webp" class="project-card__icon" alt="" aria-hidden="true" />
+              </a>
+            </footer>
+          </article>
+
+          <article class="project-card" data-tech="html css">
+            <time class="project-card__date">APR 2026 - MAY 2026</time>
+            <h2 class="project-card__title">Concourse</h2>
+            <div class="project-card__snapshot">
+              <img
+                src="assets/project-concourse.webp"
+                alt="Minimal clean architectural interface showcasing layout experiments"
+                loading="lazy"
+              />
+            </div>
+            <p class="project-card__description">
+              A vanilla HTML and CSS portfolio website designed to appeal followers of my journeys and potential employers.
+            </p>
+            <div class="project-card__flares">
+              <span class="tech-flare" data-tech="html">
+                <img src="assets/flare-html.webp" alt="" class="tech-flare__icon" aria-hidden="true" />
+                <span class="tech-flare__text">HTML</span>
+              </span>
+              <span class="tech-flare" data-tech="css">
+                <img src="assets/flare-css.webp" alt="" class="tech-flare__icon" aria-hidden="true" />
+                <span class="tech-flare__text">CSS</span>
+              </span>
+            </div>
+            <footer class="project-card__actions">
+              <a href="https://github.com/kaylamay-darling/kaylamay-darling.github.io" class="project-card__link" target="_blank" rel="noopener noreferrer" aria-label="View GitHub Repository">
+                <img src="assets/github-icon.webp" class="project-card__icon" alt="" aria-hidden="true" />
+              </a>
+              <div class="project-card__divider"></div>
+              <a href="https://kaylamay-darling.github.io/" class="project-card__link" target="_blank" rel="noopener noreferrer" aria-label="View Live Project">
+                <img src="assets/external-link.webp" class="project-card__icon" alt="" aria-hidden="true" />
+              </a>
+            </footer>
+          </article>
+
+<article class="project-card" data-tech="react html css">
+            <time class="project-card__date" datetime="2026-05">COMING SOON</time>
+            <h2 class="project-card__title">Constellate Web App</h2>
+            <div class="project-card__snapshot">
+              <img
+                src="assets/project-constellate.webp"
+                alt="Dashboard showing real-time data analytical telemetry modules"
+                loading="lazy"
+              />
+            </div>
+            <p class="project-card__description">
+              A React web app designed to track mental health and wellness, and visualize it as a star map.
+            </p>
+            <div class="project-card__flares">
+              <span class="tech-flare" data-tech="react">
+                <img src="assets/flare-react.webp" alt="" class="tech-flare__icon" aria-hidden="true" />
+                <span class="tech-flare__text">React</span>
+              </span>
+              <span class="tech-flare" data-tech="html">
+                <img src="assets/flare-html.webp" alt="" class="tech-flare__icon" aria-hidden="true" />
+                <span class="tech-flare__text">HTML</span>
+              </span>
+              <span class="tech-flare" data-tech="css">
+                <img src="assets/flare-css.webp" alt="" class="tech-flare__icon" aria-hidden="true" />
+                <span class="tech-flare__text">CSS</span>
+              </span>
+            </div>
+            <footer class="project-card__actions">
+              <a href="https://github.com" class="project-card__link" target="_blank" rel="noopener noreferrer" aria-label="View GitHub Repository">
+                <img src="assets/github-icon.webp" class="project-card__icon" alt="" aria-hidden="true" />
+              </a>
+              <div class="project-card__divider"></div>
+              <a href="#" class="project-card__link" target="_blank" rel="noopener noreferrer" aria-label="View Live Project">
+                <img src="assets/external-link.webp" class="project-card__icon" alt="" aria-hidden="true" />
+              </a>
+            </footer>
+          </article>
+
+        </div>
+      </div>
     </main>
+
+    <!-- You can safely remove script.js entirely now if desired! -->
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

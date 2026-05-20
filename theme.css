@@ -4,6 +4,7 @@
     /* == main colors == */
     --color-background-primary: #0d0b12;
     --color-background-secondary: #16131d;
+    --color-card-footer: #110d19;
 
     /* == accent colors == */
     --color-accent-primary: #5f4b8b;
@@ -33,6 +34,7 @@
     --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.9);
 
     /* == spacing == */
+    --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 32px;
@@ -146,8 +148,6 @@ main {
     list-style: none;
     display: flex;
     width: 100%;
-
-    /* Pre-initialize mobile drawer properties globally so they are already cached by the browser */
 
     position: relative; 
     flex-direction: row;

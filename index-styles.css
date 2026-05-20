@@ -388,10 +388,6 @@
     will-change: transform;
 }
 
-/* ==== ABOUT METADATA ACCORDION HANDLER ==== */
-
-/* ==== ABOUT METADATA ACCORDION HANDLER ==== */
-
 .about__row--expandable {
     cursor: pointer;
 }
@@ -411,7 +407,6 @@
 }
 
 .about__row--sub {
-    /* Switch from unstable multiple grid tracks to an optimized single container max-height engine */
     display: block !important; 
     max-height: 0;
     overflow: hidden;
@@ -431,7 +426,6 @@
     min-height: 0; 
 }
 
-/* Internal Row Segment Layout Configurations */
 .about__row-inner {
     overflow: hidden;
     width: 100%;
@@ -492,7 +486,6 @@
     font-size: 0.9rem; 
 }
 
-/* Interior Separator Borders */
 .about__row-inner:not(:last-child) {
     border-bottom: 1px solid var(--color-divider);
 }
@@ -505,10 +498,6 @@
     filter: brightness(0) saturate(100%) invert(80%) sepia(20%) saturate(1000%) hue-rotate(220deg);
     transform: scale(1.08);
 }
-
-/* ==========================================================================
-   ACTIVE OPEN ACCORDION TRANSFORMATION SELECTORS
-   ========================================================================== */
 
 .about__row--expandable[aria-expanded="true"] .about__drawer-indicator {
     transform: rotate(90deg);
@@ -531,21 +520,7 @@
     transform: translateY(0); 
 }
 
-.about {
-    container-type: inline-size;
-    container-name: about-section;
-}
-
-.about__info {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    gap: var(--spacing-lg);
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-}
+/* ==== GALLERY ==== */
 
 .about__gallery-wrapper {
     width: 100%;
@@ -695,6 +670,8 @@
     transition: filter var(--transition-base);
 }
 
+/* ==== MODAL PORTAL ==== */
+
 .modal-portal {
     position: fixed;
     inset: 0;
@@ -814,6 +791,8 @@
         scrollbar-color: var(--color-border) var(--color-background-secondary);
     }
 }
+
+/* ==== CONTAINER QUERIES ==== */
 
 @container about-section (max-width: 768px) {
     .about__info {
