@@ -46,17 +46,13 @@
         <span>Projects</span>
       </h2>
 
-<input type="checkbox" id="filter-toggle" class="state-filter-input" tabindex="-1"/>
-      
-      <!-- 2. CONTENT FILTERS: Radios that drive the visual state of the grid -->
-      <input type="radio" id="filter-all" name="portfolio-filter" class="state-filter-input" checked tabindex="-1" />
-      <input type="radio" id="filter-script" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
-      <input type="radio" id="filter-html" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
-      <input type="radio" id="filter-css" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
-      <input type="radio" id="filter-java" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
-      <input type="radio" id="filter-react" name="portfolio-filter" class="state-filter-input" tabindex="-1" />
+      <input type="radio" id="filter-all" name="portfolio-filter" class="state-filter-input" checked tabindex="-1" hidden aria-hidden="true" />
+      <input type="radio" id="filter-script" name="portfolio-filter" class="state-filter-input" tabindex="-1" hidden aria-hidden="true" />
+      <input type="radio" id="filter-html" name="portfolio-filter" class="state-filter-input" tabindex="-1" hidden aria-hidden="true" />
+      <input type="radio" id="filter-css" name="portfolio-filter" class="state-filter-input" tabindex="-1" hidden aria-hidden="true" />
+      <input type="radio" id="filter-java" name="portfolio-filter" class="state-filter-input" tabindex="-1" hidden aria-hidden="true" />
+      <input type="radio" id="filter-react" name="portfolio-filter" class="state-filter-input" tabindex="-1" hidden aria-hidden="true" />
 
-      <!-- 2. Filter Dropdown Station (Inputs removed, replaced with clickable "for" targets) -->
       <section class="filter-station" aria-label="Project Technology Filters">
         <div class="filter-dropdown">
          <button type="button" class="filter-dropdown__label" aria-haspopup="true" aria-expanded="false">

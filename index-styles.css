@@ -167,6 +167,9 @@
     padding: var(--spacing-lg) var(--spacing-md);
     gap: var(--spacing-lg);
     background: var(--color-background-primary);
+
+    container-type: inline-size;
+    container-name: about-section;
 }
 
 .about__section-header {
@@ -865,6 +868,7 @@
         animation: none !important;
     }
 }
+
 /* ==== COMPLIANCE FALLBACK MATRIX ==== */
 
 @supports (not (-webkit-background-clip: text)) and (not (background-clip: text)) {

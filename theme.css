@@ -273,17 +273,19 @@ main {
 
         clip-path: inset(0 0 100% 0);
         opacity: 0;
+        visibility: hidden;
         pointer-events: none;
 
         transform: none !important; 
         will-change: clip-path, opacity;
-        transition: clip-path var(--transition-base), opacity var(--transition-base);
+        transition: clip-path var(--transition-base), opacity var(--transition-base), visibility 0s linear var(--transition-base);
     }
 
 
     .nav-container--open .nav__list {
         clip-path: inset(0 0 0% 0); 
         opacity: 1;
+        visibility: visible;
         pointer-events: auto; 
     }
 
