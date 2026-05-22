@@ -1,24 +1,275 @@
-/* ==========================================================================
-   CONNECTS NETWORK PORTAL CONTROLLER
-   ========================================================================== */
+﻿/* ==== CONNECTS PAGE LAYOUT ==== */
 
-.connects-portal {
+.connects__section-header,
+.connects__divider {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: var(--spacing-lg) var(--spacing-md);
-    background: var(--color-background-primary);
+    max-width: 800px;
+    margin: var(--spacing-lg) auto;
+    color: var(--color-text-accent);
+    font-family: var(--font-family-main);
+}
+
+.connects__section-header::before,
+.connects__section-header::after,
+.connects__divider::before,
+.connects__divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+}
+
+.connects__section-header span,
+.connects__divider span {
+    padding: 0 var(--spacing-lg);
+    white-space: nowrap;
+    position: relative;
+}
+
+.connects__divider,
+.connects__divider span {
+    display: none;
+}
+
+.connects__divider span {
+    opacity: 0.5;
+}
+
+.connects-main {
+    width: 100%;
+    padding-left: var(--layout-gutter);
+    padding-right: var(--layout-gutter);
+    padding-bottom: var(--spacing-lg);
+    box-sizing: border-box;
 }
 
 .connects__wrapper {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    
-    /* Establishes localized space tracking metrics for connection node containers */
     container-type: inline-size;
-    container-name: connect-layout;
+    container-name: connects-layout;
 }
 
-/* Placeholder for upcoming automated layout query states */
-@container connect-layout (max-width: 450px) {
-    /* Layout reflow parameters will be added here */
+.connects__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+    width: 100%;
+}
+
+.connects__section {
+    width: 100%;
+}
+
+.connects__heading {
+    font-family: var(--font-family-main);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-md);
+}
+
+/* ==== SOCIAL LIST ==== */
+
+.social-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--color-background-secondary);
+    text-align: left;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+    border-color: var(--color-accent-primary-hover);
+    background-color: var(--color-divider);
+}
+
+.social-link__icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: invert(65%) sepia(9%) saturate(700%) hue-rotate(215deg) brightness(88%) contrast(88%);
+}
+
+#social-link__icon--x {
+    width: 16px;
+    height: 16px;
+}
+
+.social-link__arrow {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: invert(1);
+    transition: transform var(--transition-fast);
+}
+
+.social-link__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.social-link__name {
+    font-family: var(--font-family-main);
+    font-weight: bold;
+    font-size: var(--font-size-md);
+}
+
+.social-link__blurb {
+    font-family: var(--font-family-flare);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+    margin-top: 2px;
+}
+
+/* ==== CONTACT FORM ==== */
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    filter: invert(85%) sepia(12%) saturate(1200%) hue-rotate(220deg) brightness(98%) contrast(95%) opacity(0.6);
+    pointer-events: none;
+    margin-right: 12px;
+}
+
+.textarea-icon {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-family-main);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.form-group input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 42px;
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-flare);
+    font-size: var(--font-size-sm);
+    box-sizing: border-box;
+}
+
+#message {
+    width: 100%;
+    padding: 13px var(--spacing-md) var(--spacing-md) 42px;
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-flare);
+    font-size: var(--font-size-sm);
+    box-sizing: border-box;
+    min-height: 120px;
+    resize: vertical;
+    line-height: normal;
+}
+
+.form-group textarea {
+    padding-top: var(--spacing-md);
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    opacity: 0.8;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+    border-color: var(--color-accent-primary);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Explicit gap between "Send" and arrow */
+    background-color: var(--color-border);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font-family: var(--font-family-main);
+    border: 1px solid var(--color-accent-primary);
+    border-radius: var(--radius-sm);
+}
+
+.btn-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    filter: invert(1);
+    transition: filter var(--transition-fast), transform var(--transition-fast);
+}
+
+.submit-btn:hover {
+    background-color: var(--color-divider);
+}
+
+/* ==== RESPONSIVE CONTAINER ==== */
+
+@container connects-layout (max-width: 650px) {
+    .connects__grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .connects__divider,
+    .connects__divider span {
+        display: flex;
+    }
+
+    .connects__divider {
+        margin: 0;
+    }
 }

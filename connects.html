@@ -1,34 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="connects-styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="projects-styles.css" />
+    <link rel="stylesheet" href="connects-styles.css" />
     <title>Connects | The Concourse of Kayla May</title>
-</head>
-<body>
-<header class="global-header">
-    <div class="banner">
-        <img src="assets/banner.webp" width="513" height="257" alt="The Eiffel Tower rendered in a dark atmospheric style">
+  </head>
+  <body>
+    <header class="global-header">
+      <div class="banner">
+        <img
+          src="assets/banner.webp"
+          width="513"
+          height="257"
+          alt="The Eiffel Tower rendered in a dark atmospheric style"
+        />
         <h1>The Concourse of Kayla May</h1>
-    </div>
-   <nav class="nav-container" aria-label="Main Navigation">
-    <button class="nav__toggle" aria-expanded="false" aria-controls="nav__menu-list" aria-label="Menu">
-        ☰
-    </button>
-    <ul id="nav__menu-list" class="nav__list">
-        <li class="nav__item"><a class="nav__link" href="index.html">Atrium</a></li>
-        <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
-        <li class="nav__item"><a class="nav__link" href="connects.html" aria-current="page">Connects</a></li>
-    </ul>
-</nav>
-</header>
-    <main class="connects-portal">
-        <div class="connects__wrapper">
-        </div>
-    </main>
+      </div>
+      <nav class="nav-container" aria-label="Main Navigation">
+        <button
+          class="nav__toggle"
+          aria-expanded="false"
+          aria-controls="nav__menu-list"
+          aria-label="Menu"
+        >
+          ☰
+        </button>
+        <ul id="nav__menu-list" class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="index.html">Atrium</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="projects.html">Projects</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="connects.html" aria-current="page"
+              >Connects</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-    <script src="script.js"></script>
-</body>
+    <main class="connects-main">
+  <!-- Standalone Header -->
+  <h2 class="connects__section-header">
+    <span>Connects</span>
+  </h2>
+  <div class="connects__wrapper">
+    <div class="connects__grid">
+      <section class="connects__section">
+        <h2 class="connects__heading">Reach Out</h2>
+        <ul class="social-list">
+          <li>
+            <a href="https://github.com/kaylamay-darling" class="social-link" target="_blank" rel="noopener" aria-label="Github">
+              <img src="assets/github-icon.webp" alt="" class="social-link__icon" />
+              <div class="social-link__content">
+                <span class="social-link__name">GitHub</span>
+                <p class="social-link__blurb">Source Code & Conception</p>
+              </div>
+              <img src="assets/arrow-out.webp" alt="" class="social-link__arrow" />
+            </a>
+          </li>
+            <a href="https://www.linkedin.com/in/kaylamay-darling/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <img src="assets/linkedin-icon.webp" alt="" class="social-link__icon" />
+              <div class="social-link__content">
+                <span class="social-link__name">LinkedIn</span>
+                <p class="social-link__blurb">Professional Networking</p>
+              </div>
+              <img src="assets/arrow-out.webp" alt="" class="social-link__arrow" />
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/kayladarling_xx" class="social-link" target="_blank" rel="noopener" aria-label="X (Twitter)">
+              <img src="assets/x-icon.webp" alt="" class="social-link__icon" />
+              <div class="social-link__content">
+                <span class="social-link__name">X (formerly Twitter)</span>
+                <p class="social-link__blurb">Updates</p>
+              </div>
+              <img src="assets/arrow-out.webp" alt="" class="social-link__arrow" />
+            </a>
+          </li>
+          <li>
+        </ul>
+      </section>
+      <h2 class="connects__divider">
+        <span>&#9670;</span>
+      </h2>
+      <section class="connects__section">
+        <h2 class="connects__heading">Send a Message</h2>
+        <form action="https://formspree.io/f/xkoebvba" method="POST">
+    <input type="text" name="_gotcha" style="display:none" />
+    <input type="hidden" name="_next" value="https://kaylamay-darling.github.io/thank-you.html" />
+    <div class="form-group">
+        <div class="input-wrapper">
+            <img src="assets/name-icon.webp" class="input-icon" alt="" />
+            <input type="text" id="name" name="name" placeholder="Name" required aria-required="true"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-wrapper">
+            <img src="assets/subject-icon.webp" class="input-icon" alt="" />
+            <input type="text" id="subject" name="subject" placeholder="Subject" required aria-required="true"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-wrapper">
+            <img src="assets/email-icon.webp" class="input-icon" alt="" />
+            <input type="email" id="email" name="email" placeholder="Email" required aria-required="true"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-wrapper">
+            <img src="assets/message-icon.webp" class="input-icon textarea-icon" alt="" />
+            <textarea id="message" name="message" rows="5" placeholder="Message" required aria-required="true"></textarea>
+        </div>
+    </div>
+    <button type="submit" class="submit-btn">
+        Send Message 
+        <img src="assets/send-message-icon.webp" class="btn-icon" alt="" />
+    </button>
+</form>
+      </section>
+
+    </div>
+  </div>
+</main>
+<script src="main.js"></script>
+  </body>
 </html>
