@@ -210,7 +210,6 @@
 .project-grid {
     display: grid;
     grid-template-columns: 1fr;
-    /* Use smaller gap on mobile, larger on desktop */
     gap: var(--layout-gap);
     width: 100%;
 }
@@ -234,6 +233,80 @@
         box-shadow var(--transition-base),
         opacity var(--transition-base),
         transform var(--transition-base);
+
+    scroll-margin-top: 200px;
+}
+
+.projects__wrapper.lucky-active .project-card {
+    opacity: 0.4;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.projects__wrapper.lucky-active .project-card.is-lucky {
+    opacity: 1;
+    transform: scale(1.05);
+    z-index: 10;
+    border: 1px solid var(--color-lucky);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 0 15px var(--color-lucky);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==== LUCKY BANNER ==== */
+
+.fate-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    margin: -16px -16px 16px -16px;
+    background: var(--color-lucky-dim);
+    border-bottom: 1px solid var(--color-accent-primary);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    font-family: var(--font-family-flare);
+    font-size: 0.85rem;
+    color: var(--color-text-primary);
+}
+
+.fate-banner__content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fate-banner__close {
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0 4px;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+}
+
+.fate-banner__close:hover {
+    opacity: 1;
+}
+
+.fate-banner img {
+    width: 16px;
+    height: 16px;
+    filter: invert(1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==== LUCKY PROJECT CARD ==== */
+
+.project-card.is-lucky {
+    position: relative;
+    overflow: visible;
+    z-index: 2;
 }
 
 .project-card__date {
@@ -278,6 +351,22 @@
     color: var(--color-text-muted);
     transition: color var(--transition-fast);
 }
+
+/* ==== SPARKLE EFFECT ==== */
+
+.sparkle-canvas {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: calc(100% + 100px);
+    height: calc(100% + 100px);
+    z-index: -1;
+    pointer-events: none;
+    
+    border-radius: var(--radius-md); 
+}
+
+/* ==== TECH FLARES ==== */
 
 .project-card__flares {
     display: flex;

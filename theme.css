@@ -29,6 +29,9 @@
     --color-warning: #b89a5f;
     --color-danger: #a85f6a;
 
+    --color-lucky: #e77ee3;
+    --color-lucky-dim: #461b45;
+
     /* == shadow == */
     --shadow-primary: rgba(0, 0, 0, 0.75);
     --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.9);
