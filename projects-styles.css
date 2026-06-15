@@ -6,11 +6,12 @@
     --layout-gap: clamp(1rem, 3vw, 2rem);
 
     /* == flare filters == */
-    --filter-flare-script: invert(80%) sepia(24%) saturate(950%) hue-rotate(355deg) brightness(88%) contrast(85%);
+     --filter-flare-script: invert(80%) sepia(24%) saturate(950%) hue-rotate(355deg) brightness(88%) contrast(85%);
     --filter-flare-html: invert(53%) sepia(45%) saturate(650%) hue-rotate(330deg) brightness(82%) contrast(88%);
     --filter-flare-css: invert(64%) sepia(30%) saturate(600%) hue-rotate(135deg) brightness(85%) contrast(85%);
     --filter-flare-java: invert(50%) sepia(25%) saturate(850%) hue-rotate(295deg) brightness(80%) contrast(90%);
     --filter-flare-react: invert(72%) sepia(87%) saturate(1436%) hue-rotate(170deg) brightness(102%) contrast(98%);
+    --filter-flare-typescript: invert(41%) sepia(87%) saturate(1478%) hue-rotate(193deg) brightness(96%) contrast(87%);
     --filter-flare-default: sepia(1) saturate(150%) hue-rotate(225deg) brightness(0.85);
 
     --filter-action-icon: invert(65%) sepia(9%) saturate(700%) hue-rotate(215deg) brightness(88%) contrast(88%);
@@ -362,8 +363,6 @@
     height: calc(100% + 100px);
     z-index: -1;
     pointer-events: none;
-    
-    border-radius: var(--radius-md); 
 }
 
 /* ==== TECH FLARES ==== */
@@ -423,6 +422,10 @@
 
 [data-tech="react"] {
     --filter-flare-current: var(--filter-flare-react);
+}
+
+[data-tech="typescript"] {
+    --filter-flare-current: var(--filter-flare-typescript);
 }
 
 .project-card__actions {
@@ -486,7 +489,8 @@
 #filter-html:checked   ~ .projects__wrapper .project-card:not([data-tech*="html"]),
 #filter-css:checked    ~ .projects__wrapper .project-card:not([data-tech*="css"]),
 #filter-java:checked   ~ .projects__wrapper .project-card:not([data-tech*="java"]),
-#filter-react:checked  ~ .projects__wrapper .project-card:not([data-tech*="react"]) {
+#filter-react:checked  ~ .projects__wrapper .project-card:not([data-tech*="react"]),
+#filter-typescript:checked  ~ .projects__wrapper .project-card:not([data-tech*="typescript"]) {
     opacity: 0;
     transform: scale(0.95);
 
@@ -508,6 +512,7 @@
 #filter-css:checked    ~ .filter-station .filter-dropdown__label::before { content: "Filter: CSS"; }
 #filter-java:checked   ~ .filter-station .filter-dropdown__label::before { content: "Filter: Java"; }
 #filter-react:checked  ~ .filter-station .filter-dropdown__label::before { content: "Filter: React"; }
+#filter-typescript:checked  ~ .filter-station .filter-dropdown__label::before { content: "Filter: Typescript"; }
 #filter-all:checked    ~ .filter-station .filter-dropdown__label::before { content: "Filter"; }
 
 .filter-dropdown__label {
